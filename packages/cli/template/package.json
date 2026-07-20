@@ -1,0 +1,14 @@
+{
+  "name": "my-report",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "open-report dev",
+    "export": "open-report export"
+  },
+  "dependencies": {
+    "@open-report/core": "^0.0.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  }
+}

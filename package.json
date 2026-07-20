@@ -1,0 +1,28 @@
+{
+  "name": "open-report-monorepo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "turbo dev --filter=demo",
+    "build": "turbo build",
+    "typecheck": "turbo typecheck",
+    "check": "biome check .",
+    "check:fix": "biome check --write .",
+    "test": "vitest run",
+    "changeset": "changeset",
+    "release": "turbo build --filter=@open-report/* && changeset publish",
+    "core": "pnpm --filter @open-report/core",
+    "cli": "pnpm --filter @open-report/cli"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.0",
+    "@changesets/cli": "^2.29.0",
+    "turbo": "^2.6.0",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.0"
+  },
+  "packageManager": "pnpm@10.12.0",
+  "engines": {
+    "node": ">=18"
+  }
+}

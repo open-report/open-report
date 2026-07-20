@@ -1,0 +1,41 @@
+{
+  "name": "@open-report/cli",
+  "version": "0.0.1",
+  "description": "Scaffold an open-report project: npx @open-report/cli init my-report",
+  "type": "module",
+  "bin": {
+    "open-report-cli": "./bin.js"
+  },
+  "files": ["bin.js", "dist", "template", "README.md"],
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit",
+    "prepack": "pnpm build"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["report", "scaffolder", "agents"],
+  "license": "MIT",
+  "author": {
+    "name": "itsyoga",
+    "url": "https://github.com/open-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/open-report/open-report.git",
+    "directory": "packages/cli"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^15.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.17",
+    "tsdown": "^0.9.9",
+    "typescript": "^5.9.3"
+  }
+}

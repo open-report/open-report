@@ -1,0 +1,14 @@
+{
+  "name": "demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "open-report dev",
+    "export": "open-report export"
+  },
+  "dependencies": {
+    "@open-report/core": "workspace:*",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  }
+}

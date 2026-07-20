@@ -1,0 +1,48 @@
+---
+title: 機器學習期末報告 — CNN 影像分類實驗
+author: 王小明
+course: CS5087 機器學習
+citationStyle: apa
+lang: zh-TW
+createdAt: 2026-07-20T00:00:00Z
+---
+
+<Cover />
+<Toc />
+
+# 緒論
+
+深度學習近年在影像辨識任務上取得突破性進展 <Cite id="lecun2015" />,其中卷積神經網路(CNN)已成為影像分類的標準方法 <Cite id="krizhevsky2012" />。本報告在 CIFAR-10 資料集上比較三種 CNN 架構的分類表現。
+
+# 方法
+
+## 資料集
+
+CIFAR-10 包含十個類別共六萬張 32×32 彩色影像,依標準切分為五萬張訓練集與一萬張測試集。
+
+## 模型架構
+
+<Figure src="./assets/architecture.svg" caption="三種實驗架構示意圖" id="fig-arch" />
+
+如 <Ref to="fig-arch" /> 所示,本實驗比較 ResNet-18、VGG-16 與自行設計的輕量 CNN。
+
+# 結果與討論
+
+<Table caption="各模型於 CIFAR-10 測試集之準確率" id="tab-results">
+  <thead>
+    <tr><th>模型</th><th>參數量</th><th>準確率</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>ResNet-18</td><td>11.2M</td><td>94.1%</td></tr>
+    <tr><td>VGG-16</td><td>14.7M</td><td>92.6%</td></tr>
+    <tr><td>Light-CNN(本文)</td><td>1.8M</td><td>90.3%</td></tr>
+  </tbody>
+</Table>
+
+<Ref to="tab-results" /> 顯示 ResNet-18 表現最佳,而本文提出的輕量架構以約六分之一的參數量達到相近水準。
+
+# 結論
+
+殘差連接在中小型資料集上仍具明顯優勢;輕量化架構適合資源受限場景。
+
+<References />
