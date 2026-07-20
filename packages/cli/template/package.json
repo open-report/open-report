@@ -7,7 +7,7 @@
     "export": "open-report export"
   },
   "dependencies": {
-    "@open-report/core": "^0.1.0",
+    "@open-report/core": "^0.1.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   }
