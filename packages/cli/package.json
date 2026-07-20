@@ -6,7 +6,12 @@
   "bin": {
     "open-report-cli": "./bin.js"
   },
-  "files": ["bin.js", "dist", "template", "README.md"],
+  "files": [
+    "bin.js",
+    "dist",
+    "template",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsdown",
     "typecheck": "tsc --noEmit",
@@ -15,7 +20,11 @@
   "engines": {
     "node": ">=18"
   },
-  "keywords": ["report", "scaffolder", "agents"],
+  "keywords": [
+    "report",
+    "scaffolder",
+    "agents"
+  ],
   "license": "MIT",
   "author": {
     "name": "itsyoga",

@@ -10,7 +10,9 @@ program
   .command('dev')
   .description('Start the dev server with live paged preview')
   .action(() => {
-    process.stdout.write(`${chalk.yellow('open-report dev')} — not implemented yet\n`);
+    process.stdout.write(
+      `${chalk.yellow('open-report dev')} — not implemented yet\n`,
+    );
   });
 
 program

@@ -3,5 +3,9 @@ type RefProps = {
 };
 
 export const Ref = ({ to }: RefProps) => {
-  return <a data-or-ref href={`#${to}`} />;
+  return (
+    <a data-or-ref href={`#${to}`}>
+      {to}
+    </a>
+  );
 };

@@ -16,7 +16,13 @@
   "bin": {
     "open-report": "./bin.js"
   },
-  "files": ["bin.js", "dist", "src/app", "skills", "README.md"],
+  "files": [
+    "bin.js",
+    "dist",
+    "src/app",
+    "skills",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsdown",
     "typecheck": "tsc --noEmit",
@@ -25,7 +31,16 @@
   "engines": {
     "node": ">=18"
   },
-  "keywords": ["report", "document", "pdf", "citations", "react", "mdx", "vite", "agents"],
+  "keywords": [
+    "report",
+    "document",
+    "pdf",
+    "citations",
+    "react",
+    "mdx",
+    "vite",
+    "agents"
+  ],
   "license": "MIT",
   "author": {
     "name": "itsyoga",
