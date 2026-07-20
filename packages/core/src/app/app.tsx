@@ -66,7 +66,12 @@ const Report = ({ entry }: { entry: ReportEntry }) => {
         <span className="or-topbar-title">{entry.meta.title ?? entry.id}</span>
       </header>
       {Content ? (
-        <PagedView Content={Content} meta={entry.meta} dir={entry.dir} />
+        <PagedView
+          Content={Content}
+          meta={entry.meta}
+          dir={entry.dir}
+          bib={entry.bib}
+        />
       ) : (
         <p className="or-loading">Rendering…</p>
       )}

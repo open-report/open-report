@@ -72,11 +72,14 @@ export function openReport(): Plugin {
         const dir = file.slice(0, -'/index.mdx'.length);
         const reportId = dir.split('/').pop() ?? dir;
         const meta = parseFrontmatter(readFileSync(file, 'utf8'));
+        const bibPath = join(dir, 'references.bib');
+        const bib = existsSync(bibPath) ? readFileSync(bibPath, 'utf8') : '';
         return [
           '  {',
           `    id: ${JSON.stringify(reportId)},`,
           `    dir: ${JSON.stringify(`/@fs${dir}`)},`,
           `    meta: ${JSON.stringify(meta)},`,
+          `    bib: ${JSON.stringify(bib)},`,
           `    load: () => import(${JSON.stringify(`/@fs${file}`)}),`,
           '  }',
         ].join('\n');
@@ -85,13 +88,16 @@ export function openReport(): Plugin {
     },
     configureServer(server) {
       const invalidate = (file: string) => {
-        if (!file.endsWith('index.mdx')) return;
+        if (!file.endsWith('index.mdx') && !file.endsWith('references.bib')) {
+          return;
+        }
         const mod = server.moduleGraph.getModuleById(RESOLVED_REPORTS);
         if (mod) server.moduleGraph.invalidateModule(mod);
         server.ws.send({ type: 'full-reload' });
       };
       server.watcher.on('add', invalidate);
       server.watcher.on('unlink', invalidate);
+      server.watcher.on('change', invalidate);
       return () => {
         server.middlewares.use(async (req, res, next) => {
           const url = req.url?.split('?')[0];

@@ -140,4 +140,5 @@ README 開頭(照抄 open-slide 的節奏):cover 圖 → 一句定位 → `npx i
 
 - **Quarto/Posit 補位**(已在做 quarto-report skill):我們的窗口以週計,兩週 MVP 不可妥協;差異化釘死在 npm-native、docx、中文、inspector 迴圈四點上。
 - **Paged.js 效能**(長文件重排慢):MVP 限制在 50 頁內的報告場景,增量重排後續再優化;別一開始挑戰論文/書籍。
+- **TOC 回填不觸發 reflow**(known limitation):目錄於 Paged.js 分頁完成後以 DOM 後處理填入,不會重新分頁,長報告的目錄可能溢出目錄頁。後續以「TOC 預留頁數估算」或二次分頁解決。
 - **clawnify 生態**:他們填格子速度極快,名字先佔:立刻註冊 npm `@open-report/*` scope 與 GitHub org/repo。

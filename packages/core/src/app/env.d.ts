@@ -11,6 +11,8 @@ declare module 'virtual:open-report/reports' {
     id: string;
     dir: string;
     meta: Record<string, string>;
+    /** Raw BibTeX contents of the report's references.bib ('' if absent). */
+    bib: string;
     load: () => Promise<{ default: MdxContent }>;
   };
 

@@ -20,6 +20,8 @@
     "bin.js",
     "dist",
     "src/app",
+    "src/bib",
+    "styles",
     "skills",
     "README.md"
   ],

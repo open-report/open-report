@@ -172,3 +172,68 @@ a.or-ref {
   color: #1a56db;
   text-decoration: none;
 }
+
+/* Unresolved citation ids and cross-references stand out for the author. */
+.or-cite-missing,
+.or-ref-missing {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+/* --- Bibliography (citeproc output) --- */
+.or-bib {
+  font-size: 11pt;
+}
+
+.or-bib .csl-entry {
+  margin: 4pt 0;
+  text-indent: -2em;
+  padding-left: 2em;
+}
+
+[lang^="zh"] .or-bib .csl-entry {
+  text-indent: 0;
+  padding-left: 0;
+}
+
+.or-bib .csl-left-margin {
+  padding-right: 0.4em;
+}
+
+/* --- Table of contents (filled in after pagination) --- */
+.or-toc-entry {
+  display: flex;
+  align-items: baseline;
+  text-decoration: none;
+  color: inherit;
+  font-size: 11pt;
+  line-height: 1.6;
+  text-indent: 0;
+}
+
+.or-toc-h2 {
+  padding-left: 1.6em;
+  font-size: 10.5pt;
+}
+
+.or-toc-h3 {
+  padding-left: 3.2em;
+  font-size: 10.5pt;
+}
+
+.or-toc-num {
+  margin-right: 0.6em;
+  white-space: nowrap;
+}
+
+.or-toc-dots {
+  flex: 1 1 auto;
+  margin: 0 0.4em;
+  border-bottom: 1px dotted #999;
+  transform: translateY(-0.25em);
+}
+
+.or-toc-page {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
