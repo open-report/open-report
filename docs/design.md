@@ -10,15 +10,15 @@
 
 讀完原始碼,它贏在七個設計決策,每一個都要在 open-report 找到對應物:
 
-| # | open-slide 的設計 | 為什麼有效 |
-|---|---|---|
-| 1 | **固定 1920×1080 canvas、絕對 px** | 消滅了 agent 最容易出錯的 RWD 佈局歧義。skill 裡甚至教 agent「先算垂直預算再寫 JSX」 |
-| 2 | **極簡檔案契約**:`slides/<id>/index.tsx` 單檔 + `assets/`,default export 零 props 元件陣列,禁止加依賴、禁止碰其他檔案 | agent 的自由度被精準框住:內容全自由,結構零自由。`meta.createdAt` 用 regex 讀而非執行模組——連解析都為 agent 的產出設計 |
-| 3 | **Skills 隨 core 出貨**(5 個:`create-slide` 工作流 / `slide-authoring` 技術參考 + references/ 分冊 / `apply-comments` / `create-theme` / `current-slide`),`sync:skills` 偵測漂移自動同步 | 框架升級 = agent 知識同步升級。skills 分層:workflow 問問題,reference 管怎麼寫,互相引用不重複 |
-| 4 | **Inspector 評論迴圈**:瀏覽器點元素留言 → 寫回原始碼 `@slide-comment` 標記 → `/apply-comments` 讓 agent 逐條修 | 人審 → agent 改的閉環,不用截圖、不用描述位置。babel 層級的 source 操作 |
-| 5 | **`current.json` 指涉解析**:dev server 寫 `node_modules/.open-slide/current.json`,agent 靠它理解「這一頁」「這個元素」 | 解決人機對話最大的摩擦:deixis |
-| 6 | **`design` const + 面板即時調 token**(`var(--osd-*)`) | 人微調視覺不用叫 agent,agent 寫結構不用管品味 |
-| 7 | **AGENTS.md 只放 hard rules,細節全下放 skills**;template 由獨立 `@open-slide/cli init` 出貨 | 上下文經濟學:agent 每次只載入需要的知識 |
+| # | open-slide 的設計                                                                                                                                                                                          | 為什麼有效                                                                                                                |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| 1 | **固定 1920×1080 canvas、絕對 px**                                                                                                                                                                  | 消滅了 agent 最容易出錯的 RWD 佈局歧義。skill 裡甚至教 agent「先算垂直預算再寫 JSX」                                      |
+| 2 | **極簡檔案契約**:`slides/<id>/index.tsx` 單檔 + `assets/`,default export 零 props 元件陣列,禁止加依賴、禁止碰其他檔案                                                                            | agent 的自由度被精準框住:內容全自由,結構零自由。`meta.createdAt` 用 regex 讀而非執行模組——連解析都為 agent 的產出設計 |
+| 3 | **Skills 隨 core 出貨**(5 個:`create-slide` 工作流 / `slide-authoring` 技術參考 + references/ 分冊 / `apply-comments` / `create-theme` / `current-slide`),`sync:skills` 偵測漂移自動同步 | 框架升級 = agent 知識同步升級。skills 分層:workflow 問問題,reference 管怎麼寫,互相引用不重複                              |
+| 4 | **Inspector 評論迴圈**:瀏覽器點元素留言 → 寫回原始碼 `@slide-comment` 標記 → `/apply-comments` 讓 agent 逐條修                                                                                 | 人審 → agent 改的閉環,不用截圖、不用描述位置。babel 層級的 source 操作                                                   |
+| 5 | **`current.json` 指涉解析**:dev server 寫 `node_modules/.open-slide/current.json`,agent 靠它理解「這一頁」「這個元素」                                                                           | 解決人機對話最大的摩擦:deixis                                                                                             |
+| 6 | **`design` const + 面板即時調 token**(`var(--osd-*)`)                                                                                                                                            | 人微調視覺不用叫 agent,agent 寫結構不用管品味                                                                             |
+| 7 | **AGENTS.md 只放 hard rules,細節全下放 skills**;template 由獨立 `@open-slide/cli init` 出貨                                                                                                        | 上下文經濟學:agent 每次只載入需要的知識                                                                                   |
 
 Monorepo 工程紀律照抄即可:pnpm + turbo、biome、changesets、`apps/demo` dogfood、core 依賴極少(runtime 出貨給用戶,每個 dep 都算)。
 
@@ -78,16 +78,16 @@ createdAt: 2026-07-20T00:00:00Z
 
 ## 4. 核心元件(MVP 八個)
 
-| 元件 | 職責 |
-|---|---|
-| `<Cover>` | 封面:從 front-matter + template 規範生成(校名、系所、課程、指導教授、日期) |
-| `<Toc>` | 目錄,頁碼自動(分頁後回填) |
-| `# / ## / ###` | 章節,自動編號(1、1.1、1.1.1),進目錄 |
-| `<Figure>` | 圖 + 自動編號 + caption,不可跨頁 |
-| `<Table>` | 表 + 自動編號,長表自動斷頁重複表頭 |
-| `<Cite id>` | 行內引用,依 CSL 樣式渲染((王,2026)/ [1]) |
-| `<Ref to>` | 交叉引用(圖 3、表 1、第 2.1 節),自動更新 |
-| `<References>` | 參考文獻列表,只列被引用過的,依樣式排序格式化 |
+| 元件             | 職責                                                                       |
+| ---------------- | -------------------------------------------------------------------------- |
+| `<Cover>`      | 封面:從 front-matter + template 規範生成(校名、系所、課程、指導教授、日期) |
+| `<Toc>`        | 目錄,頁碼自動(分頁後回填)                                                  |
+| `# / ## / ###` | 章節,自動編號(1、1.1、1.1.1),進目錄                                        |
+| `<Figure>`     | 圖 + 自動編號 + caption,不可跨頁                                           |
+| `<Table>`      | 表 + 自動編號,長表自動斷頁重複表頭                                         |
+| `<Cite id>`    | 行內引用,依 CSL 樣式渲染((王,2026)/ [1])                                   |
+| `<Ref to>`     | 交叉引用(圖 3、表 1、第 2.1 節),自動更新                                   |
+| `<References>` | 參考文獻列表,只列被引用過的,依樣式排序格式化                               |
 
 引用引擎:**citeproc-js + CSL styles**。第一天就帶四個樣式:APA 7、MLA 9、Chicago、**GB/T 7714**(中文學術標準——Quarto 生態的弱項,我們的護城河之一)。
 
@@ -103,21 +103,21 @@ createdAt: 2026-07-20T00:00:00Z
 
 ## 6. 匯出
 
-| 格式 | 機制 | 優先級 |
-|---|---|---|
-| PDF | Paged.js 渲染 + headless Chrome 列印(open-slide 同款管線) | MVP |
-| 靜態 HTML | 閱讀模式打包單檔,可部署 Vercel/Netlify | MVP(便宜且利傳播) |
-| **docx** | 元件樹 → [docx](https://www.npmjs.com/package/docx) npm 庫映射(樣式、編號、引用、目錄域) | **Phase 2,但這是護城河**——學校只收 Word,Quarto 的 docx 出口醜且引用常壞 |
+| 格式           | 機制                                                                                    | 優先級                                                                          |
+| -------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| PDF            | Paged.js 渲染 + headless Chrome 列印(open-slide 同款管線)                               | MVP                                                                             |
+| 靜態 HTML      | 閱讀模式打包單檔,可部署 Vercel/Netlify                                                  | MVP(便宜且利傳播)                                                               |
+| **docx** | 元件樹 →[docx](https://www.npmjs.com/package/docx) npm 庫映射(樣式、編號、引用、目錄域) | **Phase 2,但這是護城河**——學校只收 Word,Quarto 的 docx 出口醜且引用常壞 |
 
 ## 7. Agent DX(skills,照抄結構)
 
-| Skill | 對照 | 內容 |
-|---|---|---|
-| `create-report` | create-slide | 四個 scoping 問題:報告類型(課堂/實驗/提案/文獻回顧)、引用格式、長度、語言 → 規劃章節 → 委派 report-authoring |
+| Skill                | 對照            | 內容                                                                                                                                                                                           |
+| -------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `create-report`    | create-slide    | 四個 scoping 問題:報告類型(課堂/實驗/提案/文獻回顧)、引用格式、長度、語言 → 規劃章節 → 委派 report-authoring                                                                                 |
 | `report-authoring` | slide-authoring | 技術參考 + references/ 分冊:MDX 契約、印刷字級表(正文 11-12pt、標題階層)、引用規則、圖表規則、**中文排版規範**(段首縮排 2em、標點禁則、中西文間距)、反模式(手動編號、手動分頁、超寬表格) |
-| `apply-comments` | 同名 | 處理 @report-comment 標記 |
-| `create-template` | create-theme | 把學校/公司的格式規範(PDF 或口述)轉成 `templates/<id>.md` |
-| `current-report` | current-slide | 解析「這一段」 |
+| `apply-comments`   | 同名            | 處理 @report-comment 標記                                                                                                                                                                      |
+| `create-template`  | create-theme    | 把學校/公司的格式規範(PDF 或口述)轉成`templates/<id>.md`                                                                                                                                     |
+| `current-report`   | current-slide   | 解析「這一段」                                                                                                                                                                                 |
 
 AGENTS.md:只放 hard rules(檔案位置、單檔契約、禁加依賴、禁碰其他報告),其餘指向 skills。`sync:skills` 機制照搬。
 
@@ -141,4 +141,5 @@ README 開頭(照抄 open-slide 的節奏):cover 圖 → 一句定位 → `npx i
 - **Quarto/Posit 補位**(已在做 quarto-report skill):我們的窗口以週計,兩週 MVP 不可妥協;差異化釘死在 npm-native、docx、中文、inspector 迴圈四點上。
 - **Paged.js 效能**(長文件重排慢):MVP 限制在 50 頁內的報告場景,增量重排後續再優化;別一開始挑戰論文/書籍。
 - **TOC 回填不觸發 reflow**(known limitation):目錄於 Paged.js 分頁完成後以 DOM 後處理填入,不會重新分頁,長報告的目錄可能溢出目錄頁。後續以「TOC 預留頁數估算」或二次分頁解決。
+- **章節/圖表編號改用 JS 後處理**(對 §4「維持 CSS counter」的必要修正):Paged.js 會把 `.or-content` 複製到每一頁,並以 per-fragment 方式解析 `counter()`——named counter 在每次分頁邊界重置,導致跨頁編號錯誤(第 3 章在新頁顯示成「1」)。已實測 counter-reset 放 `.or-content` / `.pagedjs_pages` / `:root` 皆無效。因此編號(章節、圖、表)統一由 `postprocess.ts` 在分頁後計算,與目錄、交叉引用共用同一來源,確保「編號永遠不會錯」。頁碼仍用 Paged.js 原生 `counter(page)`。
 - **clawnify 生態**:他們填格子速度極快,名字先佔:立刻註冊 npm `@open-report/*` scope 與 GitHub org/repo。

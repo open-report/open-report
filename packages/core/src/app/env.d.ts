@@ -22,7 +22,7 @@ declare module 'virtual:open-report/reports' {
 declare module 'pagedjs' {
   export class Previewer {
     preview(
-      content?: string | Element,
+      content?: string | Node,
       stylesheets?: string[],
       renderTo?: Element | null,
     ): Promise<unknown>;

@@ -76,12 +76,21 @@ export const PagedView = ({ Content, meta, dir, bib }: PagedViewProps) => {
         <Content components={buildComponents(meta, dir, formatted)} />
       </div>,
     );
+    // Paged.js needs a DocumentFragment here, not a string or a wrapper element:
+    // - a raw string throws in flow() (it calls querySelectorAll on the content
+    //   before parsing, as soon as any stylesheet sets break-*);
+    // - a wrapper <div> makes the content root's parent an un-reffed element,
+    //   which crashes rebuildTree with a null parent.
+    // A template's fragment has querySelectorAll and is not an element parent.
+    const template = document.createElement('template');
+    template.innerHTML = html;
+    const source = template.content;
 
     const blob = new Blob([printCss], { type: 'text/css' });
     const url = URL.createObjectURL(blob);
     let cancelled = false;
     new Previewer()
-      .preview(html, [url], node)
+      .preview(source, [url], node)
       .then(() => {
         if (!cancelled) postProcess(node, meta);
       })
