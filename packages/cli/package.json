@@ -1,6 +1,6 @@
 {
   "name": "@open-report/cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Scaffold an open-report project: npx @open-report/cli init my-report",
   "type": "module",
   "bin": {

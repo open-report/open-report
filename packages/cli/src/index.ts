@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { cp, mkdir } from 'node:fs/promises';
-import { join } from 'node:path';
+import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import chalk from 'chalk';
 import { Command } from 'commander';
@@ -15,8 +15,8 @@ program
   .argument('<project-name>')
   .description('Scaffold a new open-report project')
   .action(async (projectName: string) => {
-    const target = join(process.cwd(), projectName);
-    await mkdir(target, { recursive: false });
+    const target = resolve(projectName);
+    await mkdir(target, { recursive: true });
     await cp(templateDir, target, { recursive: true });
     process.stdout.write(
       [
