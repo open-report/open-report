@@ -1,6 +1,6 @@
 {
   "name": "@open-report/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Runtime and CLI for open-report — write reports in reports/, we handle the rest.",
   "type": "module",
   "exports": {
