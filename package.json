@@ -10,6 +10,7 @@
     "check:fix": "biome check --write .",
     "test": "vitest run",
     "changeset": "changeset",
+    "version-packages": "changeset version",
     "release": "turbo build --filter=@open-report/* && changeset publish",
     "core": "pnpm --filter @open-report/core",
     "cli": "pnpm --filter @open-report/cli"
