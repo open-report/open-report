@@ -1,3 +1,4 @@
+import { join } from 'node:path';
 import mdx from '@mdx-js/rollup';
 import react from '@vitejs/plugin-react';
 import remarkFrontmatter from 'remark-frontmatter';
@@ -40,6 +41,13 @@ export async function startReportServer(
       },
     },
     optimizeDeps: {
+      // The app is served from core's node_modules via /@fs, so Vite's dep
+      // scanner never sees it from the project root and never pre-bundles its
+      // deps. Point the scanner at the app entry so esbuild discovers and
+      // bundles them with proper CJS→ESM interop — otherwise pagedjs's CJS
+      // transitive dep (event-emitter) is served raw and fails with "does not
+      // provide an export named 'default'", and nothing renders.
+      entries: [join(appDir, 'main.tsx')],
       include: ['react', 'react-dom/client', 'react-dom/server'],
     },
   });

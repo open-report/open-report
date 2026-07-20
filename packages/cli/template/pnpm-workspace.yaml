@@ -1,0 +1,7 @@
+# pnpm 11+ blocks dependency build scripts by default and errors on install
+# (ERR_PNPM_IGNORED_BUILDS) — open-report's tree pulls a few transitive deps with
+# postinstall scripts (e.g. core-js, es5-ext via pagedjs) that do not need to run.
+# These two settings keep `pnpm install`, `pnpm dev`, and `pnpm run export`
+# working out of the box for any agent, without an approve-builds prompt.
+strictDepBuilds: false
+verifyDepsBeforeRun: false
