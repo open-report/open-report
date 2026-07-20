@@ -102,3 +102,21 @@ body {
   background: #fff;
   box-shadow: 0 2px 14px rgba(20, 24, 40, 0.14);
 }
+
+/* Export view (#/export/<id>): only the paged content, no preview chrome —
+   white background, no scroll padding, no gaps or shadows between pages. */
+body.or-export {
+  background: #fff;
+}
+
+body.or-export .or-paper-scroll {
+  padding: 0;
+}
+
+body.or-export .pagedjs_pages {
+  gap: 0;
+}
+
+body.or-export .pagedjs_page {
+  box-shadow: none;
+}

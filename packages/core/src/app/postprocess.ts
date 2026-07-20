@@ -165,4 +165,8 @@ export function postProcess(
       toc.appendChild(row);
     }
   }
+
+  // Signal that pagination + post-processing finished. Export and tests wait on
+  // body[data-or-ready="true"] before capturing the document.
+  doc.body?.setAttribute('data-or-ready', 'true');
 }

@@ -2,6 +2,7 @@
 import chalk from 'chalk';
 import { Command } from 'commander';
 import { dev } from './dev';
+import { type ExportFormat, exportReport } from './export';
 
 const program = new Command();
 
@@ -20,10 +21,27 @@ program
   .description('Export the report as PDF / static HTML')
   .argument('<report-id>')
   .option('--format <format>', 'pdf | html', 'pdf')
-  .action((reportId: string) => {
-    process.stdout.write(
-      `${chalk.yellow('open-report export')} ${reportId} — not implemented yet\n`,
-    );
-  });
+  .option('--out <path>', 'output file path (default: <report-id>.<format>)')
+  .action(
+    async (
+      reportId: string,
+      options: { format: ExportFormat; out?: string },
+    ) => {
+      try {
+        process.stdout.write(
+          `${chalk.dim('rendering')} ${reportId} → ${options.format}…\n`,
+        );
+        const out = await exportReport(reportId, {
+          format: options.format,
+          out: options.out,
+        });
+        process.stdout.write(`${chalk.green('✔')} exported ${out}\n`);
+        process.exit(0);
+      } catch (error) {
+        process.stderr.write(`${chalk.red('✖')} ${(error as Error).message}\n`);
+        process.exit(1);
+      }
+    },
+  );
 
 program.parse();

@@ -15,11 +15,42 @@ const useHash = () => {
 
 export const App = () => {
   const hash = useHash();
+  const exportMatch = /^#\/export\/(.+)$/.exec(hash);
+  if (exportMatch?.[1]) {
+    const id = decodeURIComponent(exportMatch[1]);
+    const entry = reports.find((r) => r.id === id);
+    return entry ? <ExportView entry={entry} /> : <Home />;
+  }
   const match = /^#\/r\/(.+)$/.exec(hash);
   const reportId = match?.[1] ? decodeURIComponent(match[1]) : undefined;
   const entry = reportId ? reports.find((r) => r.id === reportId) : undefined;
   if (entry) return <Report entry={entry} />;
   return <Home />;
+};
+
+// Bare view used by `open-report export`: paged content only, no app chrome.
+const ExportView = ({ entry }: { entry: ReportEntry }) => {
+  const [Content, setContent] = useState<MdxContent | null>(null);
+  useEffect(() => {
+    document.body.classList.add('or-export');
+    let active = true;
+    entry.load().then((mod) => {
+      if (active) setContent(() => mod.default);
+    });
+    return () => {
+      active = false;
+      document.body.classList.remove('or-export');
+    };
+  }, [entry]);
+  if (!Content) return null;
+  return (
+    <PagedView
+      Content={Content}
+      meta={entry.meta}
+      dir={entry.dir}
+      bib={entry.bib}
+    />
+  );
 };
 
 const Home = () => (

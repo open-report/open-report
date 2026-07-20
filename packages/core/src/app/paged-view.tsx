@@ -20,6 +20,8 @@ export const PagedView = ({ Content, meta, dir, bib }: PagedViewProps) => {
     const node = ref.current;
     if (!node) return;
     node.innerHTML = '';
+    // Cleared until postProcess re-sets it once this render is fully paginated.
+    document.body.removeAttribute('data-or-ready');
 
     // Pass 1: render once to collect cited ids in document order. That order
     // fixes numbering for numeric styles (GB/T 7714).
