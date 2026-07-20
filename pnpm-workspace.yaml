@@ -1,3 +1,9 @@
 packages:
   - packages/*
   - apps/*
+
+onlyBuiltDependencies:
+  - core-js
+  - es5-ext
+  - esbuild
+  - rolldown

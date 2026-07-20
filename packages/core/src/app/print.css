@@ -1,0 +1,174 @@
+@page {
+  size: A4;
+  margin: 25mm 20mm;
+
+  @bottom-center {
+    content: counter(page);
+    font-size: 9pt;
+    color: #555;
+  }
+}
+
+.or-content {
+  font-family:
+    Georgia, "Times New Roman", "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  font-size: 12pt;
+  line-height: 1.7;
+  color: #111;
+  text-align: justify;
+  counter-reset: h1 fig tab;
+}
+
+[data-or-cover] {
+  break-after: page;
+  text-align: center;
+  padding-top: 45mm;
+}
+
+.or-cover-course {
+  font-size: 12pt;
+  color: #444;
+}
+
+.or-cover-title {
+  font-size: 24pt;
+  line-height: 1.4;
+  margin: 18pt 0;
+}
+
+.or-cover-author {
+  font-size: 13pt;
+  margin-top: 24pt;
+}
+
+.or-cover-date {
+  font-size: 11pt;
+  color: #444;
+}
+
+[data-or-toc] {
+  break-after: page;
+}
+
+.or-toc-title {
+  font-size: 16pt;
+  font-weight: 700;
+}
+
+.or-placeholder {
+  color: #999;
+  font-size: 10pt;
+  text-indent: 0;
+}
+
+.or-content h1 {
+  font-size: 16pt;
+  margin: 22pt 0 10pt;
+  counter-increment: h1;
+  counter-reset: h2;
+  break-after: avoid;
+}
+
+.or-content h1::before {
+  content: counter(h1) ". ";
+}
+
+.or-content h2 {
+  font-size: 13pt;
+  margin: 16pt 0 8pt;
+  counter-increment: h2;
+  break-after: avoid;
+}
+
+.or-content h2::before {
+  content: counter(h1) "." counter(h2) " ";
+}
+
+.or-content h1.or-refs-title {
+  counter-increment: none;
+}
+
+.or-content h1.or-refs-title::before {
+  content: none;
+}
+
+[lang^="zh"] p {
+  text-indent: 2em;
+}
+
+[lang^="zh"] .or-placeholder {
+  text-indent: 0;
+}
+
+figure {
+  counter-increment: fig;
+  break-inside: avoid;
+  text-align: center;
+  margin: 14pt 0;
+}
+
+figure img {
+  max-width: 100%;
+}
+
+figcaption {
+  font-size: 10pt;
+  color: #444;
+  margin-top: 6pt;
+}
+
+figcaption::before {
+  content: "Figure " counter(fig) ". ";
+}
+
+[lang^="zh"] figcaption::before {
+  /* biome-ignore lint/suspicious/noIrregularWhitespace: full-width space is intentional CJK typography */
+  content: "圖 " counter(fig) "　";
+}
+
+.or-table {
+  counter-increment: tab;
+  break-inside: avoid;
+  margin: 14pt 0;
+}
+
+.or-table-caption {
+  text-align: center;
+  font-size: 10pt;
+  color: #444;
+  margin: 0 0 6pt;
+}
+
+[lang^="zh"] .or-table-caption {
+  text-indent: 0;
+}
+
+.or-table-caption::before {
+  content: "Table " counter(tab) ". ";
+}
+
+[lang^="zh"] .or-table-caption::before {
+  /* biome-ignore lint/suspicious/noIrregularWhitespace: full-width space is intentional CJK typography */
+  content: "表 " counter(tab) "　";
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10.5pt;
+}
+
+th,
+td {
+  border: 0.5pt solid #999;
+  padding: 4pt 8pt;
+}
+
+.or-cite {
+  color: #1a56db;
+}
+
+a.or-ref {
+  color: #1a56db;
+  text-decoration: none;
+}

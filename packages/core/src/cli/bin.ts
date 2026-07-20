@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import chalk from 'chalk';
 import { Command } from 'commander';
+import { dev } from './dev';
 
 const program = new Command();
 
@@ -9,10 +10,9 @@ program.name('open-report').description('Runtime CLI for open-report projects');
 program
   .command('dev')
   .description('Start the dev server with live paged preview')
-  .action(() => {
-    process.stdout.write(
-      `${chalk.yellow('open-report dev')} — not implemented yet\n`,
-    );
+  .option('--port <port>', 'dev server port', '5173')
+  .action(async (options: { port: string }) => {
+    await dev({ port: Number(options.port) });
   });
 
 program
