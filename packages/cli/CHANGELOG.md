@@ -1,5 +1,11 @@
 # @open-report/cli
 
+## 0.1.2
+
+### Patch Changes
+
+- Fix `pnpm dev` failing on pnpm v10 due to unapproved build scripts.
+
 ## 0.1.1
 
 ### Patch Changes

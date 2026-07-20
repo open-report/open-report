@@ -104,6 +104,10 @@ pnpm typecheck  # tsc across the monorepo
 
 See [docs/product.md](./docs/product.md) for the full roadmap — Inspector comment loop (0.2), docx export (0.3), template system (0.4), and more.
 
+
+
+
+
 ## License
 
 MIT
