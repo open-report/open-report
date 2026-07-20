@@ -1,6 +1,6 @@
 {
   "name": "@open-report/cli",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Scaffold an open-report project: npx @open-report/cli init my-report",
   "type": "module",
   "bin": {
@@ -37,6 +37,10 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://github.com/open-report/open-report",
+  "bugs": {
+    "url": "https://github.com/open-report/open-report/issues"
   },
   "dependencies": {
     "chalk": "^5.3.0",

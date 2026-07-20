@@ -1,6 +1,6 @@
 {
   "name": "@open-report/core",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Runtime and CLI for open-report — write reports in reports/, we handle the rest.",
   "type": "module",
   "exports": {
@@ -59,6 +59,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://github.com/open-report/open-report",
   "dependencies": {
     "@mdx-js/rollup": "^3.1.0",
     "@vitejs/plugin-react": "^6.0.3",
